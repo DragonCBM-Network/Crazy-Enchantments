@@ -1,43 +1,22 @@
 package me.badbones69.crazyenchantments;
 
-import java.io.BufferedReader;
-import java.io.InputStreamReader;
-import java.net.HttpURLConnection;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-import org.bukkit.Bukkit;
-import org.bukkit.ChatColor;
-import org.bukkit.Color;
-import org.bukkit.FireworkEffect;
-import org.bukkit.Location;
-import org.bukkit.Material;
+import me.badbones69.crazyenchantments.api.Version;
+import me.badbones69.crazyenchantments.controlers.FireworkDamageAPI;
+import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_11_R1;
+import org.bukkit.*;
 import org.bukkit.command.CommandSender;
 import org.bukkit.enchantments.Enchantment;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.Firework;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
+import org.bukkit.entity.*;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.FireworkMeta;
 import org.bukkit.inventory.meta.ItemMeta;
 import org.bukkit.plugin.Plugin;
 
-import me.badbones69.crazyenchantments.api.Version;
-import me.badbones69.crazyenchantments.controlers.FireworkDamageAPI;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_10_R1;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_11_R1;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_7_R4;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_8_R1;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_8_R2;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_8_R3;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_9_R1;
-import me.badbones69.crazyenchantments.multisupport.nms.NMS_v1_9_R2;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.*;
 
 public class Methods{
 	
@@ -89,20 +68,6 @@ public class Methods{
 		switch(Version.getVersion()){
 			case v1_11_R1:
 				return NMS_v1_11_R1.addGlow(item);
-			case v1_10_R1:
-				return NMS_v1_10_R1.addGlow(item);
-			case v1_9_R2:
-				return NMS_v1_9_R2.addGlow(item);
-			case v1_9_R1:
-				return NMS_v1_9_R1.addGlow(item);
-			case v1_8_R3:
-				return NMS_v1_8_R3.addGlow(item);
-			case v1_8_R2:
-				return NMS_v1_8_R2.addGlow(item);
-			case v1_8_R1:
-				return NMS_v1_8_R1.addGlow(item);
-			case v1_7_R4:
-				return NMS_v1_7_R4.addGlow(item);
 			default:
 				return item;
 		}
@@ -113,20 +78,6 @@ public class Methods{
 			switch(Version.getVersion()){
 				case v1_11_R1:
 					return NMS_v1_11_R1.addGlow(item);
-				case v1_10_R1:
-					return NMS_v1_10_R1.addGlow(item);
-				case v1_9_R2:
-					return NMS_v1_9_R2.addGlow(item);
-				case v1_9_R1:
-					return NMS_v1_9_R1.addGlow(item);
-				case v1_8_R3:
-					return NMS_v1_8_R3.addGlow(item);
-				case v1_8_R2:
-					return NMS_v1_8_R2.addGlow(item);
-				case v1_8_R1:
-					return NMS_v1_8_R1.addGlow(item);
-				case v1_7_R4:
-					return NMS_v1_7_R4.addGlow(item);
 				default:
 					return item;
 			}
@@ -261,15 +212,6 @@ public class Methods{
 			case v1_11_R1:
 				item = NMS_v1_11_R1.getSpawnEgg(EntityType.fromId(ty), amount);
 				break;
-			case v1_10_R1:
-				item = NMS_v1_10_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R2:
-				item = NMS_v1_9_R2.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R1:
-				item = NMS_v1_9_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
 			default:
 				break;
 			}
@@ -291,15 +233,6 @@ public class Methods{
 			switch(Version.getVersion()){
 			case v1_11_R1:
 				item = NMS_v1_11_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_10_R1:
-				item = NMS_v1_10_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R2:
-				item = NMS_v1_9_R2.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R1:
-				item = NMS_v1_9_R1.getSpawnEgg(EntityType.fromId(ty), amount);
 				break;
 			default:
 				break;
@@ -326,15 +259,6 @@ public class Methods{
 			switch(Version.getVersion()){
 			case v1_11_R1:
 				item = NMS_v1_11_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_10_R1:
-				item = NMS_v1_10_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R2:
-				item = NMS_v1_9_R2.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R1:
-				item = NMS_v1_9_R1.getSpawnEgg(EntityType.fromId(ty), amount);
 				break;
 			default:
 				break;
@@ -363,15 +287,6 @@ public class Methods{
 			switch(Version.getVersion()){
 			case v1_11_R1:
 				item = NMS_v1_11_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_10_R1:
-				item = NMS_v1_10_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R2:
-				item = NMS_v1_9_R2.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R1:
-				item = NMS_v1_9_R1.getSpawnEgg(EntityType.fromId(ty), amount);
 				break;
 			default:
 				break;
@@ -403,15 +318,6 @@ public class Methods{
 			switch(Version.getVersion()){
 			case v1_11_R1:
 				item = NMS_v1_11_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_10_R1:
-				item = NMS_v1_10_R1.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R2:
-				item = NMS_v1_9_R2.getSpawnEgg(EntityType.fromId(ty), amount);
-				break;
-			case v1_9_R1:
-				item = NMS_v1_9_R1.getSpawnEgg(EntityType.fromId(ty), amount);
 				break;
 			default:
 				break;

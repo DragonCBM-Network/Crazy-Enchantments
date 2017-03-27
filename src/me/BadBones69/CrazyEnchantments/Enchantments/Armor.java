@@ -1,31 +1,20 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.HashMap;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.events.*;
+import me.badbones69.crazyenchantments.multisupport.Support;
 import org.bukkit.Bukkit;
 import org.bukkit.Effect;
 import org.bukkit.Location;
 import org.bukkit.Material;
-import org.bukkit.entity.Endermite;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.EntityType;
-import org.bukkit.entity.IronGolem;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Silverfish;
-import org.bukkit.entity.Wolf;
-import org.bukkit.entity.Zombie;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
-import org.bukkit.event.entity.EntityDamageByEntityEvent;
-import org.bukkit.event.entity.EntityDamageEvent;
+import org.bukkit.event.entity.*;
 import org.bukkit.event.entity.EntityDamageEvent.DamageCause;
-import org.bukkit.event.entity.EntityDeathEvent;
-import org.bukkit.event.entity.EntityTargetEvent;
-import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerMoveEvent;
 import org.bukkit.event.player.PlayerQuitEvent;
 import org.bukkit.event.world.ChunkUnloadEvent;
@@ -35,16 +24,9 @@ import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 import org.bukkit.util.Vector;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.events.AngelUseEvent;
-import me.badbones69.crazyenchantments.api.events.ArmorEquipEvent;
-import me.badbones69.crazyenchantments.api.events.AuraActiveEvent;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.api.events.HellForgedUseEvent;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.HashMap;
 
 public class Armor implements Listener{
 	
@@ -432,9 +414,6 @@ public class Armor implements Listener{
 									EnchantmentUseEvent event = new EnchantmentUseEvent(player, CEnchantments.IMPLANTS, armor);
 									Bukkit.getPluginManager().callEvent(event);
 									if(!event.isCancelled()){
-										if(Support.hasSpartan()){
-											SpartanSupport.cancelFastEat(player);
-										}
 										if(player.getFoodLevel()+food<=20){
 											player.setFoodLevel(player.getFoodLevel()+food);
 										}

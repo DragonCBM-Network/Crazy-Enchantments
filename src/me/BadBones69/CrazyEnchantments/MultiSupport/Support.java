@@ -1,13 +1,15 @@
 package me.badbones69.crazyenchantments.multisupport;
 
+import me.badbones69.crazyenchantments.Main;
+import me.ryanhamshire.GriefPrevention.Claim;
+import me.ryanhamshire.GriefPrevention.GriefPrevention;
+import me.ryanhamshire.GriefPrevention.PlayerData;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.Player;
-import org.bukkit.plugin.Plugin;
-
-import me.badbones69.crazyenchantments.Main;
 
 public class Support {
 	
@@ -124,38 +126,10 @@ public class Support {
 	}
 	
 	public static boolean inTerritory(Player player){
-		if(hasFactions()){
-			Plugin factions = Bukkit.getServer().getPluginManager().getPlugin("Factions");
-			if(factions.getDescription().getAuthors().contains("drtshock")){
-				if(FactionsUUID.inTerritory(player)){
-					return true;
-				}
-			}
-			if(factions.getDescription().getWebsite()!=null){
-				if(factions.getDescription().getWebsite().equalsIgnoreCase("https://www.massivecraft.com/factions")){
-					if(FactionsSupport.inTerritory(player)){
-						return true;
-					}
-				}
-			}
-		}
-		if(hasFeudal()){
-			if(FeudalSupport.inTerritory(player)){
-				return true;
-			}
-		}
-		if(hasASkyBlock()){
-			if(ASkyBlockSupport.inTerritory(player)){
-				return true;
-			}
-		}
-		if(hasAcidIsland()){
-			if(AcidIslandSupport.inTerritory(player)){
-				return true;
-			}
-		}
-		if(hasKingdoms()){
-			if(KingdomSupport.inTerritory(player)){
+		PlayerData playerData = GriefPrevention.instance.dataStore.getPlayerData(player.getUniqueId());
+		Claim claim = GriefPrevention.instance.dataStore.getClaimAt(player.getLocation(), false, null);
+		if (claim != null) {
+			if (claim.allowBuild(player, Material.BRICK) == null) {
 				return true;
 			}
 		}
@@ -163,106 +137,52 @@ public class Support {
 	}
 	
 	public static boolean isFriendly(Entity P, Entity O){
-		if(P instanceof Player&&O instanceof Player){
+		if(P instanceof Player&&O instanceof Player) {
 			Player player = (Player) P;
 			Player other = (Player) O;
-			if(hasFactions()){
-				Plugin factions = Bukkit.getServer().getPluginManager().getPlugin("Factions");
-				if(factions.getDescription().getAuthors().contains("drtshock")){
-					if(FactionsUUID.isFriendly(player, other))return true;
-				}
-				if(factions.getDescription().getWebsite()!=null){
-					if(factions.getDescription().getWebsite().equalsIgnoreCase("https://www.massivecraft.com/factions")){
-						if(FactionsSupport.isFriendly(player, other))return true;
-					}
-				}
-			}
-			if(hasFeudal()){
-				if(FeudalSupport.isFrendly(player, other)){
-					return true;
-				}
-			}
-			if(hasASkyBlock()){
-				if(ASkyBlockSupport.isFriendly(player, other)){
-					return true;
-				}
-			}
-			if(hasAcidIsland()){
-				if(AcidIslandSupport.isFriendly(player, other)){
-					return true;
-				}
-			}
-			if(hasKingdoms()){
-				if(KingdomSupport.isFriendly(player, other)){
-					return true;
-				}
-			}
 		}
 		return false;
 	}
 	
 	public static boolean canBreakBlock(Player player, Block block){
-		if(hasFactions()){
-			Plugin factions = Bukkit.getServer().getPluginManager().getPlugin("Factions");
-			if(player!=null){
-				if(factions.getDescription().getAuthors().contains("drtshock")){
-					if(FactionsUUID.canBreakBlock(player, block))return true;
-					if(!FactionsUUID.canBreakBlock(player, block))return false;
-				}
-				if(factions.getDescription().getWebsite()!=null){
-					if(factions.getDescription().getWebsite().equalsIgnoreCase("https://www.massivecraft.com/factions")){
-						if(FactionsSupport.canBreakBlock(player, block))return true;
-						if(!FactionsSupport.canBreakBlock(player, block))return false;
-					}
-				}
-			}
-		}
-		if(hasFeudal()){
-			if(FeudalSupport.canBreakBlock(player, block)){
-				return true;
-			}else{
-				return false;
-			}
-		}
-		if(hasKingdoms()){
-			if(KingdomSupport.canBreakBlock(player, block)){
+		PlayerData playerData = GriefPrevention.instance.dataStore.getPlayerData(player.getUniqueId());
+		Claim claim = GriefPrevention.instance.dataStore.getClaimAt(player.getLocation(), false, null);
+		if (claim != null) {
+			if (claim.allowBuild(player, Material.BRICK) == null) {
 				return true;
 			}
+			return false;
 		}
 		return true;
 	}
 	
 	public static boolean allowsPVP(Location loc){
-		if(hasWorldEdit() && hasWorldGuard()){
-			if(WorldGuard.allowsPVP(loc))return true;
-			if(!WorldGuard.allowsPVP(loc))return false;
+		Claim claim = GriefPrevention.instance.dataStore.getClaimAt(loc, false, null);
+		if (claim == null)
+		{
+			return  true;
 		}
-		return true;
+		return false;
 	}
 	
 	public static boolean allowsBreak(Location loc){
-		if(hasWorldEdit() && hasWorldGuard()){
-			if(WorldGuard.allowsBreak(loc))return true;
-			if(!WorldGuard.allowsBreak(loc))return false;
-		}
 		return true;
 	}
 	
 	public static boolean allowsExplotions(Location loc){
-		if(hasWorldEdit() && hasWorldGuard()){
-			if(WorldGuard.allowsExplosions(loc))return true;
-			if(!WorldGuard.allowsExplosions(loc))return false;
+		Claim claim = GriefPrevention.instance.dataStore.getClaimAt(loc, false, null);
+		if (claim == null) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 	
 	public static boolean inWingsRegion(Location loc){
 		if(Main.settings.getConfig().contains("Settings.EnchantmentOptions.Wings.Regions")){
-			for(String rg : Main.settings.getConfig().getStringList("Settings.EnchantmentOptions.Wings.Regions")){
-				if(hasWorldEdit() && hasWorldGuard()){
-					if(WorldGuard.inRegion(rg, loc)){
-						return true;
-					}
+			Claim claim = GriefPrevention.instance.dataStore.getClaimAt(loc, false, null);
+			if (claim != null) {
+				if (!claim.isAdminClaim()) {
+					return true;
 				}
 			}
 		}

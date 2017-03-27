@@ -1,7 +1,12 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.ParticleEffect;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.Version;
+import me.badbones69.crazyenchantments.api.events.ArmorEquipEvent;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import me.badbones69.crazyenchantments.multisupport.Support;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -18,14 +23,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.ParticleEffect;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.Version;
-import me.badbones69.crazyenchantments.api.events.ArmorEquipEvent;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.ArrayList;
 
 public class Boots implements Listener{
 	
@@ -124,9 +122,6 @@ public class Boots implements Listener{
 				if(CEnchantments.WINGS.isEnabled()){
 					if(Support.inTerritory(player) || Support.inWingsRegion(player.getLocation())){
 						if(!areEnemiesNearBy(player)){
-							if(Support.hasSpartan()){
-								SpartanSupport.cancelFly(player);
-							}
 							if(e.isFlying()){
 								e.setCancelled(true);
 								player.setFlying(true);
@@ -204,9 +199,6 @@ public class Boots implements Listener{
 				if(CEnchantments.WINGS.isEnabled()){
 					if(Support.inTerritory(player) || Support.inWingsRegion(player.getLocation())){
 						if(!areEnemiesNearBy(player)){
-							if(Support.hasSpartan()){
-								SpartanSupport.cancelFly(player);
-							}
 							player.setAllowFlight(true);
 							Flying.add(player);
 						}

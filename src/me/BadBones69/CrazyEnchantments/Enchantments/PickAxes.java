@@ -1,9 +1,9 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -21,13 +21,9 @@ import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.inventory.ItemStack;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.multisupport.NoCheatPlusSupport;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 public class PickAxes implements Listener{
 	
@@ -66,14 +62,6 @@ public class PickAxes implements Listener{
 						blocks.remove(player);
 						HashMap<ItemStack, Integer> drops = new HashMap<ItemStack, Integer>();
 						int xp = 0;
-						if(Support.hasNoCheatPlus()){
-							NoCheatPlusSupport.exemptPlayer(player);
-						}
-						if(Support.hasSpartan()){
-							SpartanSupport.cancelNucker(player);
-							SpartanSupport.cancelNoSwing(player);
-							SpartanSupport.cancelBlockReach(player);
-						}
 						Boolean damage = true;
 						if(Main.settings.getConfig().contains("Settings.EnchantmentOptions.Blast-Full-Durability")){
 							damage = Main.settings.getConfig().getBoolean("Settings.EnchantmentOptions.Blast-Full-Durability");
@@ -216,9 +204,6 @@ public class PickAxes implements Listener{
 						}
 						if(!damage){
 							Methods.removeDurability(item, player);
-						}
-						if(Support.hasNoCheatPlus()){
-							NoCheatPlusSupport.unexemptPlayer(player);
 						}
 						for(ItemStack i : drops.keySet()){
 							if(i.getType() == Material.INK_SACK){

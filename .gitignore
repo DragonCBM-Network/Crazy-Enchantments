@@ -5,3 +5,5 @@ Notes.txt
 *.prefs
 
 *.class
+.idea/
+Crazy-Enchantments.iml

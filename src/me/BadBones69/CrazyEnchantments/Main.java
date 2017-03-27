@@ -1,9 +1,11 @@
 package me.badbones69.crazyenchantments;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.logging.Level;
-
+import me.badbones69.crazyenchantments.api.*;
+import me.badbones69.crazyenchantments.api.currencyapi.CurrencyAPI;
+import me.badbones69.crazyenchantments.api.events.ArmorListener;
+import me.badbones69.crazyenchantments.api.events.AuraListener;
+import me.badbones69.crazyenchantments.controlers.*;
+import me.badbones69.crazyenchantments.enchantments.*;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.Material;
@@ -21,43 +23,9 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.bukkit.scheduler.BukkitRunnable;
 
-import me.badbones69.crazyenchantments.api.CEBook;
-import me.badbones69.crazyenchantments.api.CEPlayer;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.CrazyEnchantments;
-import me.badbones69.crazyenchantments.api.CustomEBook;
-import me.badbones69.crazyenchantments.api.CustomEnchantments;
-import me.badbones69.crazyenchantments.api.DataStorage;
-import me.badbones69.crazyenchantments.api.GKitz;
-import me.badbones69.crazyenchantments.api.InfoType;
-import me.badbones69.crazyenchantments.api.Version;
-import me.badbones69.crazyenchantments.api.currencyapi.CurrencyAPI;
-import me.badbones69.crazyenchantments.api.events.ArmorListener;
-import me.badbones69.crazyenchantments.api.events.AuraListener;
-import me.badbones69.crazyenchantments.controlers.BlackSmith;
-import me.badbones69.crazyenchantments.controlers.DustControl;
-import me.badbones69.crazyenchantments.controlers.EnchantmentControl;
-import me.badbones69.crazyenchantments.controlers.FireworkDamageAPI;
-import me.badbones69.crazyenchantments.controlers.GKitzControler;
-import me.badbones69.crazyenchantments.controlers.LostBook;
-import me.badbones69.crazyenchantments.controlers.ProtectionCrystal;
-import me.badbones69.crazyenchantments.controlers.Scrambler;
-import me.badbones69.crazyenchantments.controlers.ScrollControl;
-import me.badbones69.crazyenchantments.controlers.ShopControler;
-import me.badbones69.crazyenchantments.controlers.SignControl;
-import me.badbones69.crazyenchantments.controlers.Tinkerer;
-import me.badbones69.crazyenchantments.enchantments.Armor;
-import me.badbones69.crazyenchantments.enchantments.Axes;
-import me.badbones69.crazyenchantments.enchantments.Boots;
-import me.badbones69.crazyenchantments.enchantments.Bows;
-import me.badbones69.crazyenchantments.enchantments.Helmets;
-import me.badbones69.crazyenchantments.enchantments.PickAxes;
-import me.badbones69.crazyenchantments.enchantments.Swords;
-import me.badbones69.crazyenchantments.enchantments.Tools;
-import me.badbones69.crazyenchantments.multisupport.DakataAntiCheatSupport;
-import me.badbones69.crazyenchantments.multisupport.SilkSpawners;
-import me.badbones69.crazyenchantments.multisupport.StackMobSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.io.IOException;
+import java.util.List;
+import java.util.logging.Level;
 
 public class Main extends JavaPlugin implements Listener{
 	
@@ -113,15 +81,6 @@ public class Main extends JavaPlugin implements Listener{
 		pm.registerEvents(new Boots(), this);
 		pm.registerEvents(new Armor(), this);
 		pm.registerEvents(new Swords(), this);
-		if(Support.hasSilkSpawner()){
-			pm.registerEvents(new SilkSpawners(), this);
-		}
-		if(Support.hasStackMob()){
-			pm.registerEvents(new StackMobSupport(), this);
-		}
-		if(Support.hasDakata()){
-			pm.registerEvents(new DakataAntiCheatSupport(), this);
-		}
 		//==========================================================================\\
 		try{
 			Metrics metrics = new Metrics(this); metrics.start();

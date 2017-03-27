@@ -1,7 +1,13 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.HashMap;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.currencyapi.Currency;
+import me.badbones69.crazyenchantments.api.currencyapi.CurrencyAPI;
+import me.badbones69.crazyenchantments.api.events.DisarmerUseEvent;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import me.badbones69.crazyenchantments.multisupport.Support;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.entity.LivingEntity;
@@ -18,15 +24,7 @@ import org.bukkit.plugin.Plugin;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.currencyapi.Currency;
-import me.badbones69.crazyenchantments.api.currencyapi.CurrencyAPI;
-import me.badbones69.crazyenchantments.api.events.DisarmerUseEvent;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.HashMap;
 
 public class Swords implements Listener{
 	
@@ -177,9 +175,6 @@ public class Swords implements Listener{
 									EnchantmentUseEvent event = new EnchantmentUseEvent(damager, CEnchantments.NUTRITION, It);
 									Bukkit.getPluginManager().callEvent(event);
 									if(!event.isCancelled()){
-										if(Support.hasSpartan()){
-											SpartanSupport.cancelFastEat(damager);
-										}
 										if(damager.getSaturation()+(2*Main.CE.getPower(It, CEnchantments.NUTRITION))<=20){
 											damager.setSaturation(damager.getSaturation()+(2*Main.CE.getPower(It, CEnchantments.NUTRITION)));
 										}
@@ -278,16 +273,6 @@ public class Swords implements Listener{
 									EnchantmentUseEvent event = new EnchantmentUseEvent(damager, CEnchantments.OBLITERATE, It);
 									Bukkit.getPluginManager().callEvent(event);
 									if(!event.isCancelled()){
-										if(Support.hasSpartan()){
-											if(e.getEntity() instanceof Player){
-												SpartanSupport.cancelSpeed((Player)e.getEntity());
-												SpartanSupport.cancelFly((Player)e.getEntity());
-												SpartanSupport.cancelClip((Player)e.getEntity());
-												SpartanSupport.cancelNormalMovements((Player)e.getEntity());
-												SpartanSupport.cancelNoFall((Player)e.getEntity());
-												SpartanSupport.cancelJesus((Player)e.getEntity());
-											}
-										}
 										e.getEntity().setVelocity(damager.getLocation().getDirection().multiply(2).setY(1.25));
 									}
 								}

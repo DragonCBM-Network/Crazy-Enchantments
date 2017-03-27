@@ -1,15 +1,14 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.ParticleEffect;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import me.badbones69.crazyenchantments.multisupport.Support;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
-import org.bukkit.entity.Arrow;
-import org.bukkit.entity.Entity;
-import org.bukkit.entity.LivingEntity;
-import org.bukkit.entity.Player;
-import org.bukkit.entity.Projectile;
+import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.EventPriority;
 import org.bukkit.event.Listener;
@@ -22,13 +21,8 @@ import org.bukkit.potion.PotionEffectType;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.ParticleEffect;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Bows implements Listener{
 
@@ -191,14 +185,6 @@ public class Bows implements Listener{
 												EnchantmentUseEvent event = new EnchantmentUseEvent((Player)e.getEntity(), CEnchantments.PULL, item);
 												Bukkit.getPluginManager().callEvent(event);
 												if(!event.isCancelled()){
-													if(Support.hasSpartan()){
-														SpartanSupport.cancelSpeed((Player)e.getEntity());
-														SpartanSupport.cancelFly((Player)e.getEntity());
-														SpartanSupport.cancelClip((Player)e.getEntity());
-														SpartanSupport.cancelNormalMovements((Player)e.getEntity());
-														SpartanSupport.cancelNoFall((Player)e.getEntity());
-														SpartanSupport.cancelJesus((Player)e.getEntity());
-													}
 													en.setVelocity(v);
 												}
 											}else{

@@ -1,8 +1,11 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import me.mrCookieSlime.Slimefun.Objects.SlimefunItem.SlimefunItem;
+import me.mrCookieSlime.Slimefun.api.BlockStorage;
 import org.bukkit.Bukkit;
 import org.bukkit.GameMode;
 import org.bukkit.Location;
@@ -21,10 +24,8 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import java.util.ArrayList;
+import java.util.HashMap;
 
 public class Tools implements Listener{
 
@@ -63,6 +64,11 @@ public class Tools implements Listener{
 									return;
 								}
 							}
+						}
+						SlimefunItem sfItem = BlockStorage.check(e.getBlock());
+						if (sfItem != null)
+						{
+							return;
 						}
 						EnchantmentUseEvent event = new EnchantmentUseEvent(player, CEnchantments.TELEPATHY, item);
 						Bukkit.getPluginManager().callEvent(event);

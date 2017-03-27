@@ -1,7 +1,10 @@
 package me.badbones69.crazyenchantments.enchantments;
 
-import java.util.ArrayList;
-
+import me.badbones69.crazyenchantments.Main;
+import me.badbones69.crazyenchantments.Methods;
+import me.badbones69.crazyenchantments.api.CEnchantments;
+import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
+import me.badbones69.crazyenchantments.multisupport.Support;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -15,12 +18,7 @@ import org.bukkit.inventory.meta.SkullMeta;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
-import me.badbones69.crazyenchantments.Main;
-import me.badbones69.crazyenchantments.Methods;
-import me.badbones69.crazyenchantments.api.CEnchantments;
-import me.badbones69.crazyenchantments.api.events.EnchantmentUseEvent;
-import me.badbones69.crazyenchantments.multisupport.SpartanSupport;
-import me.badbones69.crazyenchantments.multisupport.Support;
+import java.util.ArrayList;
 
 public class Axes implements Listener{
 
@@ -66,9 +64,6 @@ public class Axes implements Listener{
 										EnchantmentUseEvent event = new EnchantmentUseEvent(damager, CEnchantments.FEEDME, item);
 										Bukkit.getPluginManager().callEvent(event);
 										if(!event.isCancelled()){
-											if(Support.hasSpartan()){
-												SpartanSupport.cancelFastEat(damager);
-											}
 											if(damager.getFoodLevel()+food<20){
 												damager.setFoodLevel((int) (damager.getSaturation()+food));
 											}
