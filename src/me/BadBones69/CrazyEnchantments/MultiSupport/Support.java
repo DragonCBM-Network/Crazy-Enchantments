@@ -1,5 +1,7 @@
 package me.badbones69.crazyenchantments.multisupport;
 
+import com.gmail.nossr50.datatypes.party.Party;
+import com.gmail.nossr50.party.PartyManager;
 import me.badbones69.crazyenchantments.Main;
 import me.ryanhamshire.GriefPrevention.Claim;
 import me.ryanhamshire.GriefPrevention.GriefPrevention;
@@ -140,6 +142,8 @@ public class Support {
 		if(P instanceof Player&&O instanceof Player) {
 			Player player = (Player) P;
 			Player other = (Player) O;
+			Party PartyP = PartyManager.getParty(player);
+			return  PartyP.hasMember(other.getUniqueId());
 		}
 		return false;
 	}
@@ -166,7 +170,11 @@ public class Support {
 	}
 	
 	public static boolean allowsBreak(Location loc){
-		return true;
+		Claim claim = GriefPrevention.instance.dataStore.getClaimAt(loc, false, null);
+		if (claim == null) {
+				return true;
+		}
+		return false;
 	}
 	
 	public static boolean allowsExplotions(Location loc){
