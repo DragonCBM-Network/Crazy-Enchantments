@@ -139,11 +139,13 @@ public class Support {
 	}
 	
 	public static boolean isFriendly(Entity P, Entity O){
-		if(P instanceof Player&&O instanceof Player) {
+		if(P instanceof Player && O instanceof Player) {
 			Player player = (Player) P;
 			Player other = (Player) O;
 			Party PartyP = PartyManager.getParty(player);
-			return  PartyP.hasMember(other.getUniqueId());
+			if (PartyP != null) {
+				return PartyP.hasMember(other.getUniqueId());
+			}
 		}
 		return false;
 	}
