@@ -1,12 +1,12 @@
 package me.badbones69.crazyenchantments.multisupport.nms;
 
 import org.bukkit.Material;
-import org.bukkit.craftbukkit.v1_11_R1.inventory.CraftItemStack;
+import org.bukkit.craftbukkit.v1_12_R1.inventory.CraftItemStack;
 import org.bukkit.entity.EntityType;
 import org.bukkit.inventory.ItemStack;
 
-import net.minecraft.server.v1_11_R1.NBTTagList;
-import net.minecraft.server.v1_11_R1.NBTTagCompound;
+import net.minecraft.server.v1_12_R1.NBTTagList;
+import net.minecraft.server.v1_12_R1.NBTTagCompound;
 
 
 public class NMS_v1_11_R1{
@@ -17,7 +17,7 @@ public class NMS_v1_11_R1{
 				return item;
 			}
 		}
-		net.minecraft.server.v1_11_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
+		net.minecraft.server.v1_12_R1.ItemStack nmsStack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound tag = null;
         if (!nmsStack.hasTag()) {
             tag = new NBTTagCompound();
@@ -35,7 +35,7 @@ public class NMS_v1_11_R1{
 	@SuppressWarnings("deprecation")
 	public static ItemStack getSpawnEgg(EntityType type, int amount) {
         ItemStack item = new ItemStack(Material.MONSTER_EGG, amount);
-        net.minecraft.server.v1_11_R1.ItemStack stack = CraftItemStack.asNMSCopy(item);
+        net.minecraft.server.v1_12_R1.ItemStack stack = CraftItemStack.asNMSCopy(item);
         NBTTagCompound tagCompound = stack.getTag();
         if(tagCompound == null){
             tagCompound = new NBTTagCompound();
